@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=go_back
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d go_back"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_SOURCE=postgresql://root:secret@postgres:5432/go_back?sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_healthy
