@@ -8,6 +8,7 @@ import (
 	"github.com/alperdemr/go-back/pb"
 	"github.com/alperdemr/go-back/util"
 	"github.com/alperdemr/go-back/val"
+	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
